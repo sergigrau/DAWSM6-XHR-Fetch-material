@@ -42,11 +42,7 @@ function iniciar() {
 			});
 			var consulta = url.parse(request.url, true).query;
 			for (var clau in consulta) {
-
-				if (consulta.hasOwnProperty('cadena')) {
 					sortida = consulta['cadena'].split("").reverse().join("");
-				}
-
 			}
 			response.write(sortida);
 			response.end();

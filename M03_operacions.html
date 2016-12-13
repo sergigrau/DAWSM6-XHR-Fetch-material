@@ -20,7 +20,7 @@
 		<title>DAW2</title>
 		<meta name="author" content="sergi grau" />
 		<script type="text/javascript">
-            
+
             var xhr;
 
 
@@ -43,16 +43,9 @@
 						}
 					}
 				}
-                
                 ajaxFunction();
                 var id= setInterval(ajaxFunction, 5000);
-                
-				document.getElementById("num1").onkeyup = function() {
-					ajaxFunction();
-				};
-				document.getElementById("num2").onkeyup = function() {
-					ajaxFunction();
-				};
+
 			}
 
 			function ajaxFunction() {

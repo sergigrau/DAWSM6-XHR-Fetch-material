@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ca">
+<!--
+	recupera una imatge com a Blob amb AJAX
+	@author sergi grau, sergi.grau@fje.edu
+	@version 1.0
+	date 06.12.2015
+	format del document UTF-8
+
+	CHANGELOG
+	06.12.2015
+	recupera una imatge com a Blob amb AJAX
+
+	NOTES
+	ORIGEN
+    Desenvolupament Aplicacions Web. Jesuïtes el Clot
+	-->
+
+<head>
+	<meta charset="utf-8" />
+	<title>DAW2</title>
+	<meta name="author" content="sergi grau" />
+	<script type="text/javascript">
+		var xhr;
+
+		function inici() {
+
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'imatge', true);
+			xhr.responseType = 'blob';
+
+			xhr.onload = function(e) {
+				if (this.status == 200) {
+					var blob = this.response;
+					var img = document.createElement('img');
+					img.onload = function(e) {
+						window.URL.revokeObjectURL(img.src);
+					img.src = window.URL.createObjectURL(blob);
+					document.body.appendChild(img);
+				}
+			};
+
+			xhr.send();
+		}
+	}
+		window.addEventListener("load", inici, true);
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
