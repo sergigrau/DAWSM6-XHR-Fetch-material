@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ca">
+<!--
+	enviar per XHR2 un formulari
+	@author sergi grau, sergi.grau@fje.edu
+	@version 1.0
+    date 13.11.20
+	format del document UTF-8
+
+	CHANGELOG
+    date 13.11.20
+    enviar per XHR2 un formulari
+
+	NOTES
+	ORIGEN
+    Desenvolupament Aplicacions Web. Jesuïtes el Clot
+	-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>DAW2</title>
+    <meta name="author" content="sergi grau" />
+    <script type="text/javascript">
+        var xhr;
+
+        function inici() {
+
+            let formData = new FormData();
+            formData.append('nom', 'sergi');
+            formData.append('id', 123456);
+
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '/enviar', true);
+            xhr.responseType = 'text';
+
+            xhr.onload = function (e) {
+                if (this.status == 200) {
+                    let resposta = this.response;
+                    console.log(resposta);
+                }
+            };
+
+            xhr.send(formData);
+
+        }
+        window.addEventListener("load", inici, true);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

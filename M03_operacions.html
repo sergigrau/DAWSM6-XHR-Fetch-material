@@ -21,7 +21,8 @@
 		<meta name="author" content="sergi grau" />
 		<script type="text/javascript">
 
-            var xhr;
+			var xhr;
+			var id;
 
 
 			function inici() {
@@ -44,7 +45,7 @@
 					}
 				}
                 ajaxFunction();
-                var id= setInterval(ajaxFunction, 5000);
+                id= setInterval(ajaxFunction, 5000);
 
 			}
 
@@ -54,7 +55,7 @@
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState == 4) {
 						document.getElementById("operacio").innerHTML = xhr.responseText;
-                        if(operacio=='FINAL') clearInterval(id);
+						if(document.getElementById("operacio").innerHTML.split(" ")[0]==="FINAL") clearInterval(id);	
 					}
 				};
 
