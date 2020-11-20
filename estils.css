@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Open+Sans:300');
+body, input, button {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+}
+
+h1 {
+    font-family: 'Indie Flower', cursive;
+    font-size: 4em;
+}
