@@ -11,9 +11,8 @@
 1.XHR <br/>
 2.XHR2<br/>
 3.NODEJS<br/>
-4.Google Chart<br/>
-5.XML<br/>
-6.JSON<br/>
-7.Promises<br/>
-8.Async Functions<br/>
-9.Fetch API<br/>
+4.XML<br/>
+5.JSON<br/>
+6.Promises<br/>
+7.Async Functions<br/>
+8.Fetch API<br/>
