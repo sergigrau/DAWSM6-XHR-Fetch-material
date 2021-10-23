@@ -8,7 +8,10 @@
  * CHANGELOG
  * 06.12.2015
  * - Servidor HTTP que suma dos nombres pasats com a paràmetre
- *
+ 
+* 06.10.2021
+ * - url path deprected
+
  * NOTES
  * ORIGEN
  * Desenvolupament Aplicacions Web. Jesuïtes el Clot
@@ -21,8 +24,6 @@ var fs = require('fs');
 function iniciar() {
 	function onRequest(request, response) {
 		var sortida;
-		
-		
 		console.log("Petició per a  " + request.url + " rebuda.");
 		if (request.url == '/formulari') {
 			response.writeHead(200, {
