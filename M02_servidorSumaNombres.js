@@ -21,9 +21,10 @@ var fs = require('fs');
 function iniciar() {
 	function onRequest(request, response) {
 		var sortida;
-		var pathname = url.parse(request.url).pathname;
-		console.log("Petició per a  " + pathname + " rebuda.");
-		if (pathname == '/formulari') {
+		
+		
+		console.log("Petició per a  " + request.url + " rebuda.");
+		if (request.url == '/formulari') {
 			response.writeHead(200, {
 				"Content-Type" : "text/html; charset=utf-8"
 			});
