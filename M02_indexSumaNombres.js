@@ -8,7 +8,8 @@
  * CHANGELOG
  * 06.12.2015
  * - arxiu principal que arrenca el servidor HTTP
- *
+ * 11.11.2021
+ * - Actualizacions versió nodeJS 17
  * NOTES
  * ORIGEN
  * Desenvolupament Aplicacions Web. Jesuïtes el Clot

@@ -9,20 +9,25 @@
  * 06.12.2015
  * - Servidor HTTP que rep una cadena i la retorna invertida
  *
+ * 11.11.2021
+ * - Actualizacions versió nodeJS 17
+ *
  * NOTES
  * ORIGEN
  * Desenvolupament Aplicacions Web. Jesuïtes el Clot
  */
 var http = require("http");
 var url = require("url");
-var querystring = require("querystring");
 var fs = require('fs');
 
 function iniciar() {
 	function onRequest(request, response) {
-		var sortida;
-		var pathname = url.parse(request.url).pathname;
-		console.log("Petició per a  " + pathname + " rebuda.");
+		let sortida;
+        const baseURL = request.protocol + '://' + request.headers.host + '/';
+        const reqUrl = new URL(request.url, baseURL);
+        console.log("Petició per a  " + reqUrl.pathname + " rebuda.");
+        const pathname = reqUrl.pathname;
+
 		if (pathname == '/formulari') {
 			response.writeHead(200, {
 				"Content-Type" : "text/html; charset=utf-8"
@@ -40,10 +45,9 @@ function iniciar() {
 			response.writeHead(200, {
 				"Content-Type" : "text/plain; charset=utf-8"
 			});
-			var consulta = url.parse(request.url, true).query;
-			for (var clau in consulta) {
-					sortida = consulta['cadena'].split("").reverse().join("");
-			}
+			
+			let cadena = reqUrl.searchParams.get('cadena')
+			sortida = cadena.split("").reverse().join("");
 			response.write(sortida);
 			response.end();
 		} else {
@@ -56,8 +60,6 @@ function iniciar() {
 		}
 
 	}
-
-
 	http.createServer(onRequest).listen(8888);
 	console.log("Servidor iniciat.");
 }

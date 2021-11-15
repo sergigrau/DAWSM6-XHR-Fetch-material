@@ -8,23 +8,26 @@
  * CHANGELOG
  * 06.12.2015
  * - Servidor HTTP que suma dos nombres pasats com a paràmetre
- 
-* 06.10.2021
+ * 06.10.2021
  * - url path deprected
-
+ * 11.11.2021
+ * - Actualizacions versió nodeJS 17
  * NOTES
  * ORIGEN
  * Desenvolupament Aplicacions Web. Jesuïtes el Clot
  */
 var http = require("http");
 var url = require("url");
-var querystring = require("querystring");
 var fs = require('fs');
 
 function iniciar() {
 	function onRequest(request, response) {
-		var sortida;
-		console.log("Petició per a  " + request.url + " rebuda.");
+		let sortida;
+        const baseURL = request.protocol + '://' + request.headers.host + '/';
+        const reqUrl = new URL(request.url, baseURL);
+        console.log("Petició per a  " + reqUrl.pathname + " rebuda.");
+        const pathname = reqUrl.pathname;
+
 		if (request.url == '/formulari') {
 			response.writeHead(200, {
 				"Content-Type" : "text/html; charset=utf-8"
@@ -43,9 +46,10 @@ function iniciar() {
 			response.writeHead(200, {
 				"Content-Type" : "text/html; charset=utf-8"
 			});
-			var consulta = url.parse(request.url, true).query;
-				var num1= parseInt(consulta['num1']);
-				var num2= parseInt(consulta['num2']);
+			let parametres = reqUrl.searchParams;
+
+				var num1= parseInt(parametres.get('num1'));
+				var num2= parseInt(parametres.get('num2'));
 				sortida = num1+"+"+num2+"="+(num1+num2);
 
 			response.write(sortida);
