@@ -8,7 +8,8 @@
  * CHANGELOG
  * 12.12.16
  * - Aplicació amb Node.js HTTP que permet recuperar una imatge per AJAX
- *
+ * 11.11.2021
+ * - Actualizacions versió nodeJS 17
  * NOTES
  * ORIGEN
  * Desenvolupament Aplicacions Web. Jesuïtes el Clot
@@ -19,10 +20,12 @@ var fs = require('fs');
 
 function iniciar() {
     function onRequest(request, response) {
-        var sortida;
-        var pathname = url.parse(request.url).pathname;
+        let sortida;
+        const baseURL = request.protocol + '://' + request.headers.host + '/';
+        const reqUrl = new URL(request.url, baseURL);
+        console.log("Petició per a  " + reqUrl.pathname + " rebuda.");
+        const pathname = reqUrl.pathname;
 
-        console.log("Petició per a  " + pathname + " rebuda.");
         if (pathname == '/inici') {
             fs.readFile('./M06_recuperaImatgeBlob.html', function(err, sortida) {
                 response.writeHead(200, {

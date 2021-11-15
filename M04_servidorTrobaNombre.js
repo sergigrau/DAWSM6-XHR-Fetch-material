@@ -8,22 +8,25 @@
  * CHANGELOG
  * 06.12.2015
  * - Aplicació amb Node.js HTTP que demana que s'encerti un numero al usuari
- *
+ * 11.11.2021
+ * - Actualizacions versió nodeJS 17
  * NOTES
  * ORIGEN
  * Desenvolupament Aplicacions Web. Jesuïtes el Clot
  */
 var http = require("http");
 var url = require("url");
-var querystring = require("querystring");
 var fs = require('fs');
 var aleatori = Math.ceil(Math.random()*10);
 function iniciar() {
 	function onRequest(request, response) {
-		var sortida;
-		var pathname = url.parse(request.url).pathname;
-		var consulta = url.parse(request.url, true).query;
-		var res = parseInt(consulta['res']);
+		let sortida;
+        const baseURL = request.protocol + '://' + request.headers.host + '/';
+        const reqUrl = new URL(request.url, baseURL);
+        console.log("Petició per a  " + reqUrl.pathname + " rebuda.");
+        const pathname = reqUrl.pathname;
+		
+		let res = reqUrl.searchParams.get('res');
 
 		console.log("Petició per a  " + pathname + " rebuda.");
 		if (pathname == '/inici') {
@@ -62,7 +65,6 @@ function iniciar() {
 		}
 
 	}
-
 
 	http.createServer(onRequest).listen(8888);
 	console.log("Servidor iniciat.");

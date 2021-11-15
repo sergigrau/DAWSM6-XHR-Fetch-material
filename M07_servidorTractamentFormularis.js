@@ -8,7 +8,8 @@
  * CHANGELOG
  * date 13.11.20
  * - Aplicació amb Node.js HTTP que permet recuperar dades d'un formulari per XHR2
- *
+ * 11.11.2021
+ * - Actualizacions versió nodeJS 17
  * NOTES
  * ORIGEN
  * Desenvolupament Aplicacions Web. Jesuïtes el Clot
@@ -20,10 +21,12 @@ const formidable = require('formidable');
 
 function iniciar() {
     function onRequest(request, response) {
-        var sortida;
-        var pathname = url.parse(request.url).pathname;
+        let sortida;
+        const baseURL = request.protocol + '://' + request.headers.host + '/';
+        const reqUrl = new URL(request.url, baseURL);
+        console.log("Petició per a  " + reqUrl.pathname + " rebuda.");
+        const pathname = reqUrl.pathname;
 
-        console.log("Petició per a  " + pathname + " rebuda.");
         if (pathname == '/inici') {
             fs.readFile('./M07_formulariXHR2.html', function (err, sortida) {
                 response.writeHead(200, {

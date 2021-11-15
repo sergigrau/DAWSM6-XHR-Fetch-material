@@ -8,26 +8,27 @@
  * CHANGELOG
  * 06.12.2015
  * - Servidor HTTP que presenta diverses operacions artimètiques a l'usuari
- *
+ * 11.11.2021
+ * - Actualizacions versió nodeJS 17
  * NOTES
  * ORIGEN
  * Desenvolupament Aplicacions Web. Jesuïtes el Clot
  */
 var http = require("http");
 var url = require("url");
-var querystring = require("querystring");
 var fs = require('fs');
 var operacions = ['1+2', '2*2'];
 var numOperacio = 0;
 var encertades = 0;
 function iniciar() {
 	function onRequest(request, response) {
-		var sortida;
-		var pathname = url.parse(request.url).pathname;
-		var consulta = url.parse(request.url, true).query;
-		var res = parseInt(consulta['res']);
-
-		console.log("Petició per a  " + pathname + " rebuda.");
+		let sortida;
+        const baseURL = request.protocol + '://' + request.headers.host + '/';
+        const reqUrl = new URL(request.url, baseURL);
+        console.log("Petició per a  " + reqUrl.pathname + " rebuda.");
+        const pathname = reqUrl.pathname;
+		
+		let res = reqUrl.searchParams.get('res');
 		if (pathname == '/inici') {
 			response.writeHead(200, {
 				"Content-Type" : "text/html; charset=utf-8"
