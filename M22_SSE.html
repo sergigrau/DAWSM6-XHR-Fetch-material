@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSE Example</title>
+</head>
+<body>
+    <h1>Server-Sent Events</h1>
+    <div id="datahora"></div>
+
+    <script>
+        if (typeof(EventSource) !== "undefined") {
+            const source = new EventSource("/esdeveniments");
+
+            source.onmessage = function(event) {
+                document.getElementById("datahora").innerHTML = "Data i Hora: " + event.data;
+            };
+
+            source.onerror = function(event) {
+                console.error("EventSource error:", event);
+            };
+        } else {
+            document.getElementById("datahora").innerHTML = "Navegador no suporta server-sent events...";
+        }
+    </script>
+</body>
+</html>
